@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiveFotball – resultater fortløpende</title>
+  <meta name="description" content="Live fotballresultater som oppdateres fortløpende. Premier League, La Liga, Bundesliga, Serie A og mer." />
+  <link rel="preconnect" href="https://worldcup26.ir" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="ball" aria-hidden="true">⚽</span>
+      <div>
+        <h1>LiveFotball</h1>
+        <p class="tagline">Resultater fortløpende</p>
+      </div>
+    </div>
+
+    <div class="status-cluster">
+      <div class="pill" id="liveCountPill">
+        <span class="dot"></span>
+        <span id="liveCountLabel">Sjekker kamper…</span>
+      </div>
+      <div class="meta">
+        <span id="clock">--:--:--</span>
+        <span class="sep">·</span>
+        <span id="lastUpdate">Oppdaterer…</span>
+      </div>
+      <button id="refreshBtn" class="ghost-btn" type="button">Oppdater nå</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" data-view="live" type="button">Live nå</button>
+        <button class="tab" data-view="today" type="button">Dagens kamper</button>
+        <button class="tab" data-view="results" type="button">Ferdige</button>
+        <button class="tab" data-view="upcoming" type="button">Kommende</button>
+        <button class="tab" data-view="table" type="button">Tabeller</button>
+      </div>
+
+      <div class="filters">
+        <label class="search">
+          <span class="sr-only">Søk etter lag</span>
+          <input id="searchInput" type="search" placeholder="Søk etter lag…" autocomplete="off" />
+        </label>
+        <label class="toggle">
+          <input id="autoRefresh" type="checkbox" checked />
+          <span>Auto-oppdater</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="league-row" id="leagueChips" aria-label="Velg liga"></section>
+
+    <section id="matchBoard" class="board" aria-live="polite"></section>
+    <section id="tableBoard" class="board is-hidden"></section>
+  </main>
+
+  <aside id="matchDrawer" class="drawer" hidden>
+    <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <header class="drawer-head">
+        <div>
+          <p class="drawer-kicker" id="drawerLeague"></p>
+          <h2 id="drawerTitle">Kampdetaljer</h2>
+        </div>
+        <button id="closeDrawer" class="ghost-btn" type="button">Lukk</button>
+      </header>
+      <div id="drawerBody" class="drawer-body"></div>
+    </div>
+  </aside>
+
+  <footer>
+    <p>
+      Data hentes fortløpende fra
+      <a href="https://worldcup26.ir/football-api" target="_blank" rel="noopener">worldcup26.ir soccer API</a>.
+      <span id="apiMeta">Sjekker API-status…</span>
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
